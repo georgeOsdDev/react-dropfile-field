@@ -24,14 +24,18 @@ describe('Test of DropfileField', () => {
     });
   });
 
-  describe('Test of file handling', () => {
-
+  describe('Test of preview image', () => {
     let canvas = document.createElement('canvas');
-    let file1, file2;
+    let file1, file2
     beforeEach((done) => {
+
+      let d1 = false, d2 = false;
+
       canvas.toBlob(
         function (blob) {
           file1 = blob;
+          d1 = true;
+          if (d1 && d2) done();
         },
         'image/jpeg'
       );
@@ -39,7 +43,105 @@ describe('Test of DropfileField', () => {
       canvas.toBlob(
         function (blob) {
           file2 = blob;
+          d2 = true;
+          if (d1 && d2) done();
+        },
+        'text/html'
+      );
+    });
+
+    it('should render preview image with default style', function () {
+      component = TestUtils.renderIntoDocument(<DropfileField maxFileCount={2}/>);
+      component.setFiles([file1, file2]);
+      const previews = TestUtils.scryRenderedDOMComponentsWithClass(component, 'df-preview');
+      const previewImage = TestUtils.findRenderedDOMComponentWithTag(previews[0], 'img');
+      expect(React.findDOMNode(previewImage).style.width).to.be.eql('100%');
+    });
+
+    it('should render preview image with custome style', function () {
+      component = TestUtils.renderIntoDocument(<DropfileField maxFileCount={2} previewImageStyle={{width: '90px'}}/>);
+      component.setFiles([file1, file2]);
+      const previews = TestUtils.scryRenderedDOMComponentsWithClass(component, 'df-preview');
+      const previewImage = TestUtils.findRenderedDOMComponentWithTag(previews[0], 'img');
+      expect(React.findDOMNode(previewImage).style.width).to.be.eql('90px');
+    });
+
+  });
+
+  describe('Test of preview icon', () => {
+    let canvas = document.createElement('canvas');
+    let file1, file2 = new Blob(['<html></html>'], {type : 'text/html'})
+    beforeEach((done) => {
+
+      let d1 = false, d2 = false;
+
+      canvas.toBlob(
+        function (blob) {
+          file1 = blob;
           done();
+        },
+        'image/jpeg'
+      );
+    });
+
+    it('should render preview icon with default style', function () {
+      component = TestUtils.renderIntoDocument(<DropfileField maxFileCount={2}/>);
+      component.setFiles([file1, file2]);
+      const previews = TestUtils.scryRenderedDOMComponentsWithClass(component, 'df-preview');
+      const previewIcon = TestUtils.findRenderedDOMComponentWithTag(previews[1], 'icon');
+      expect(React.findDOMNode(previewIcon).style.fontSize).to.be.eql('200%');
+    });
+
+    it('should render preview icon with custome style', function () {
+      component = TestUtils.renderIntoDocument(<DropfileField maxFileCount={2} previewIconStyle={{fontSize: '90px'}}/>);
+      component.setFiles([file1, file2]);
+      const previews = TestUtils.scryRenderedDOMComponentsWithClass(component, 'df-preview');
+      const previewIcon = TestUtils.findRenderedDOMComponentWithTag(previews[1], 'icon');
+      expect(React.findDOMNode(previewIcon).style.fontSize).to.be.eql('90px');
+    });
+
+    it('should render preview icon without className', function () {
+      component = TestUtils.renderIntoDocument(<DropfileField maxFileCount={2} />);
+      component.setFiles([file1, file2]);
+      const previews = TestUtils.scryRenderedDOMComponentsWithClass(component, 'df-preview');
+      const previewIcon = TestUtils.findRenderedDOMComponentWithTag(previews[1], 'icon');
+      expect(React.findDOMNode(previewIcon).className).to.be.eql('');
+    });
+
+    it('should render preview icon with specified className', function () {
+      component = TestUtils.renderIntoDocument(<DropfileField maxFileCount={2} iconClassNamesByExtension={{default: 'myIcon'}}/>);
+      component.setFiles([file1, file2]);
+      const previews = TestUtils.scryRenderedDOMComponentsWithClass(component, 'df-preview');
+      const previewIcon = TestUtils.scryRenderedDOMComponentsWithClass(previews[1], 'myIcon');
+      expect(previewIcon).to.be.length(1);
+    });
+
+
+  });
+
+
+  describe('Test of file handling', () => {
+
+    let canvas = document.createElement('canvas');
+    let file1, file2;
+    beforeEach((done) => {
+
+      let d1 = false, d2 = false;
+
+      canvas.toBlob(
+        function (blob) {
+          file1 = blob;
+          d1 = true;
+          if (d1 && d2) done();
+        },
+        'image/jpeg'
+      );
+
+      canvas.toBlob(
+        function (blob) {
+          file2 = blob;
+          d2 = true;
+          if (d1 && d2) done();
         },
         'text/html'
       );
@@ -52,7 +154,6 @@ describe('Test of DropfileField', () => {
       expect(called).to.be.eql(true);
       expect(result).to.be.an('array');
       expect(result[0]).to.be.eql(file1);
-
     });
 
     it('should call onDrop with files limited by maxFileCount prop', function () {
@@ -65,8 +166,6 @@ describe('Test of DropfileField', () => {
       expect(result[0]).to.be.eql(file1);
       expect(result[1]).to.be.eql(file2);
     });
-
-
   })
 
 

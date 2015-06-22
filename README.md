@@ -24,6 +24,9 @@ npm install --save react-dropfile-field
 DropfileField.propTypes = {
   textField: React.PropTypes.element,
   iconClassNamesByExtension: React.PropTypes.object,
+  previewImageStyle: React.PropTypes.object,
+  previewIconStyle: React.PropTypes.object,
+  dragActiveStyle: React.PropTypes.object,
   maxFileCount: React.PropTypes.number,
   onDrop: React.PropTypes.func,
   accept: React.PropTypes.string,
@@ -33,6 +36,9 @@ DropfileField.propTypes = {
 DropfileField.defaultProps = {
   textField: (<textarea/>),
   iconClassNamesByExtension: {},
+  previewImageStyle: {},
+  previewIconStyle: {},
+  dragActiveStyle: {},
   maxFileCount: 1,
   onDrop: () => {}
 };
@@ -41,6 +47,12 @@ DropfileField.defaultProps = {
   * `textField`: element for text input
 
   * `iconClassNamesByExtension`: icon class name look up table keyed with file extension,
+
+  * `previewImageStyle`: style of previw image
+
+  * `previewIconStyle`: style of previw icon
+
+  * `dragActiveStyle`: style of when files are dragging on element
 
   * `maxFileCount`: available file count
 
