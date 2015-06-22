@@ -49,6 +49,7 @@ class App extends React.Component {
                                 multiLine={true} />}
           onDrop={this.onDrop.bind(this)}
           iconClassNamesByExtension ={iconClassNamesByExtension}
+          maxFileCount={3}
           />
         <button onClick={this.toggle.bind(this)}>toggle file input</button>
 
