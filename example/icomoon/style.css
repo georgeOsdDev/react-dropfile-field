@@ -1,0 +1,55 @@
+@font-face {
+	font-family: 'icomoon';
+	src:url('fonts/icomoon.eot?tmaryv');
+	src:url('fonts/icomoon.eot?#iefixtmaryv') format('embedded-opentype'),
+		url('fonts/icomoon.ttf?tmaryv') format('truetype'),
+		url('fonts/icomoon.woff?tmaryv') format('woff'),
+		url('fonts/icomoon.svg?tmaryv#icomoon') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+	font-family: 'icomoon';
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+
+	/* Better Font Rendering =========== */
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.icon-file-text:before {
+	content: "\e926";
+}
+.icon-file-picture:before {
+	content: "\e927";
+}
+.icon-file-music:before {
+	content: "\e928";
+}
+.icon-file-play:before {
+	content: "\e929";
+}
+.icon-file-video:before {
+	content: "\e92a";
+}
+.icon-file-zip:before {
+	content: "\e92b";
+}
+.icon-file-pdf:before {
+	content: "\eada";
+}
+.icon-file-openoffice:before {
+	content: "\eadb";
+}
+.icon-file-word:before {
+	content: "\eadc";
+}
+.icon-file-excel:before {
+	content: "\eadd";
+}
