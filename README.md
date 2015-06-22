@@ -24,6 +24,7 @@ npm install --save react-dropfile-field
 DropfileField.propTypes = {
   textField: React.PropTypes.element,
   iconClassNamesByExtension: React.PropTypes.object,
+  maxFileCount: React.PropTypes.number,
   onDrop: React.PropTypes.func,
   accept: React.PropTypes.string,
   multiple: React.PropTypes.bool
@@ -32,7 +33,8 @@ DropfileField.propTypes = {
 DropfileField.defaultProps = {
   textField: (<textarea/>),
   iconClassNamesByExtension: {},
-  onDrop: (e, files) => {}
+  maxFileCount: 1,
+  onDrop: () => {}
 };
 ```
 
@@ -40,7 +42,9 @@ DropfileField.defaultProps = {
 
   * `iconClassNamesByExtension`: icon class name look up table keyed with file extension,
 
-  * `onDrop(event, files)`: callback for file drop
+  * `maxFileCount`: available file count
+
+  * `onDrop(event, files)`: allback for file drop
 
   * `accept`: accept attribute for manually toggled file input
 
