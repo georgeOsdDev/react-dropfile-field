@@ -1,0 +1,120 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>React-dropfile-field by georgeOsdDev</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/github-light.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>React-dropfile-field</h1>
+        <p>Textarea react component with drop file preview</p>
+
+        <p class="view"><a href="https://github.com/georgeOsdDev/react-dropfile-field">View the Project on GitHub <small>georgeOsdDev/react-dropfile-field</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/georgeOsdDev/react-dropfile-field/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/georgeOsdDev/react-dropfile-field/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/georgeOsdDev/react-dropfile-field">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h1>
+<a id="react-dropfile-field--" class="anchor" href="#react-dropfile-field--" aria-hidden="true"><span class="octicon octicon-link"></span></a>react-dropfile-field <a href="https://travis-ci.org/georgeOsdDev/react-dropfile-field"><img src="https://travis-ci.org/georgeOsdDev/react-dropfile-field.svg?branch=develop" alt="Build Status"></a> <a href="http://badge.fury.io/js/react-dropfile-field"><img src="https://badge.fury.io/js/react-dropfile-field.svg" alt="npm version"></a>
+</h1>
+
+<p>Input textarea with file drag drop preview.</p>
+
+<p><a href="http://gyazo.com/3241ddd32aadcbafe909580a703ab88c"><img src="http://i.gyazo.com/3241ddd32aadcbafe909580a703ab88c.gif" alt="Gyazo"></a></p>
+
+<h2>
+<a id="demo" class="anchor" href="#demo" aria-hidden="true"><span class="octicon octicon-link"></span></a>Demo</h2>
+
+<p><a href="http://georgeosddev.github.io/react-dropfile-field/example/">View Demo</a></p>
+
+<h2>
+<a id="installation" class="anchor" href="#installation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Installation</h2>
+
+<div class="highlight highlight-bash"><pre>npm install --save react-dropfile-field</pre></div>
+
+<h2>
+<a id="api" class="anchor" href="#api" aria-hidden="true"><span class="octicon octicon-link"></span></a>API</h2>
+
+<h3>
+<a id="dropfilefield" class="anchor" href="#dropfilefield" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>DropfileField</code>
+</h3>
+
+<h4>
+<a id="props" class="anchor" href="#props" aria-hidden="true"><span class="octicon octicon-link"></span></a>Props</h4>
+
+<div class="highlight highlight-javascript"><pre>DropfileField.propTypes <span class="pl-k">=</span> {
+  textField<span class="pl-k">:</span> React.PropTypes.element,
+  iconClassNamesByExtension<span class="pl-k">:</span> React.PropTypes.<span class="pl-c1">object</span>,
+  <span class="pl-c1">onDrop</span><span class="pl-k">:</span> React.PropTypes.func,
+  accept<span class="pl-k">:</span> React.PropTypes.string,
+  multiple<span class="pl-k">:</span> React.PropTypes.bool
+};
+
+DropfileField.defaultProps <span class="pl-k">=</span> {
+  textField<span class="pl-k">:</span> (<span class="pl-k">&lt;</span>textarea/<span class="pl-k">&gt;</span>),
+  iconClassNamesByExtension<span class="pl-k">:</span> {},
+  <span class="pl-c1">onDrop</span><span class="pl-k">:</span> (<span class="pl-smi">e</span>, <span class="pl-smi">files</span>)<span class="pl-k"> =&gt;</span> {}
+};</pre></div>
+
+<ul>
+<li><p><code>textField</code>: element for text input</p></li>
+<li><p><code>iconClassNamesByExtension</code>: icon class name look up table keyed with file extension,</p></li>
+<li><p><code>onDrop(event, files)</code>: callback for file drop</p></li>
+<li><p><code>accept</code>: accept attribute for manually toggled file input</p></li>
+<li><p><code>multiple</code>: multiple attribute for manually toggled file input</p></li>
+</ul>
+
+<h2>
+<a id="usage-example" class="anchor" href="#usage-example" aria-hidden="true"><span class="octicon octicon-link"></span></a>Usage example</h2>
+
+<div class="highlight highlight-javascript"><pre>
+<span class="pl-k">import</span> {DropfileField} <span class="pl-k">from</span> <span class="pl-s"><span class="pl-pds">'</span>react-dropfile-field<span class="pl-pds">'</span></span>;
+
+<span class="pl-k">const</span> <span class="pl-c1">iconClassNamesByExtension</span> <span class="pl-k">=</span> {
+  <span class="pl-s"><span class="pl-pds">'</span>text<span class="pl-pds">'</span></span><span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>icon-file-text<span class="pl-pds">'</span></span>,
+  <span class="pl-s"><span class="pl-pds">'</span>doc<span class="pl-pds">'</span></span><span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>icon-file-word<span class="pl-pds">'</span></span>,
+  <span class="pl-s"><span class="pl-pds">'</span>xls<span class="pl-pds">'</span></span><span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>icon-file-excel<span class="pl-pds">'</span></span>,
+  <span class="pl-s"><span class="pl-pds">'</span>xlsx<span class="pl-pds">'</span></span><span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>icon-file-excel<span class="pl-pds">'</span></span>,
+  <span class="pl-s"><span class="pl-pds">'</span>pdf<span class="pl-pds">'</span></span><span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>icon-file-pdf<span class="pl-pds">'</span></span>,
+   <span class="pl-s"><span class="pl-pds">'</span>default<span class="pl-pds">'</span></span><span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>icon-file-text<span class="pl-pds">'</span></span>
+}
+
+<span class="pl-k">&lt;</span>DropfileField
+  textField<span class="pl-k">=</span>{<span class="pl-k">&lt;</span>textarea /<span class="pl-k">&gt;</span>}
+  <span class="pl-c1">onDrop</span><span class="pl-k">=</span>{<span class="pl-v">this</span>.<span class="pl-c1">onDrop</span>.bind(<span class="pl-v">this</span>)}
+  iconClassNamesByExtension <span class="pl-k">=</span>{iconClassNamesByExtension}
+  /<span class="pl-k">&gt;</span></pre></div>
+
+<p>See  <a href="https://github.com/georgeOsdDev/react-dropfile-field/tree/develop/example">example</a></p>
+
+<div class="highlight highlight-bash"><pre>npm install
+npm run start:example</pre></div>
+
+<h2>
+<a id="tests" class="anchor" href="#tests" aria-hidden="true"><span class="octicon octicon-link"></span></a>Tests</h2>
+
+<div class="highlight highlight-bash"><pre>npm <span class="pl-c1">test</span></pre></div>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/georgeOsdDev">georgeOsdDev</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+    
+  </body>
+</html>
