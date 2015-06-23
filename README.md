@@ -29,6 +29,7 @@ DropfileField.propTypes = {
   dragActiveStyle: React.PropTypes.object,
   maxFileCount: React.PropTypes.number,
   onDrop: React.PropTypes.func,
+  onFileClear: React.PropTypes.func,
   accept: React.PropTypes.string,
   multiple: React.PropTypes.bool
 };
@@ -40,7 +41,8 @@ DropfileField.defaultProps = {
   previewIconStyle: {},
   dragActiveStyle: {},
   maxFileCount: 1,
-  onDrop: () => {}
+  onDrop: () => {},
+  onFileClear: () => {}
 };
 ```
 
@@ -56,7 +58,9 @@ DropfileField.defaultProps = {
 
   * `maxFileCount`: available file count
 
-  * `onDrop(event, files)`: allback for file drop
+  * `onDrop(event, files)`: callback for file drop event
+
+  * `onFileClear()`: callback for file clear event
 
   * `accept`: accept attribute for manually toggled file input
 
