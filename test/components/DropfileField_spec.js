@@ -73,8 +73,6 @@ describe('Test of DropfileField', () => {
     let file1, file2 = new Blob(['<html></html>'], {type : 'text/html'})
     beforeEach((done) => {
 
-      let d1 = false, d2 = false;
-
       canvas.toBlob(
         function (blob) {
           file1 = blob;
@@ -166,12 +164,17 @@ describe('Test of DropfileField', () => {
       expect(result[0]).to.be.eql(file1);
       expect(result[1]).to.be.eql(file2);
     });
-  })
 
+    it('should call onFileClear when file cleared', function () {
+      let called;
+      component = TestUtils.renderIntoDocument(<DropfileField maxFileCount={2} onFileClear={() => {called = true; }}/>);
+      component.setFiles([file1, file2, file1]);
+      component.clearFiles();
+      expect(called).to.be.eql(true);
+    });
+  });
 
   // @TODO
   // How to test drop file input?
-
-
 
 });
