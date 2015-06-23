@@ -1,5 +1,8 @@
 ## Change Log
 
+### Ver 0.0.4
+
+
 ### Ver 0.0.3
 
   * #5 [Add onFileCleared handler](https://github.com/georgeOsdDev/react-dropfile-field/issues/5)
