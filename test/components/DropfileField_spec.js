@@ -1,10 +1,10 @@
 'use strict';
-import React from 'react/addons';
+import React from 'react';
 import chai from 'chai';
 let expect = chai.expect;
 
 import DropfileField from '../../lib/components/DropfileField';
-const {TestUtils} = React.addons;
+const TestUtils = require('react-addons-test-utils');
 
 describe('Test of DropfileField', () => {
   let component;
@@ -53,17 +53,17 @@ describe('Test of DropfileField', () => {
     it('should render preview image with default style', function () {
       component = TestUtils.renderIntoDocument(<DropfileField maxFileCount={2}/>);
       component.setFiles([file1, file2]);
-      const previews = TestUtils.scryRenderedDOMComponentsWithClass(component, 'df-preview');
-      const previewImage = TestUtils.findRenderedDOMComponentWithTag(previews[0], 'img');
-      expect(React.findDOMNode(previewImage).style.width).to.be.eql('100%');
+      const preview = TestUtils.scryRenderedDOMComponentsWithClass(component, 'df-preview')[0];
+      const previewImage = preview.getElementsByTagName('img')[0];
+      expect(previewImage.style.width).to.be.eql('100%');
     });
 
-    it('should render preview image with custome style', function () {
+    it('should render preview image with custom style', function () {
       component = TestUtils.renderIntoDocument(<DropfileField maxFileCount={2} previewImageStyle={{width: '90px'}}/>);
       component.setFiles([file1, file2]);
-      const previews = TestUtils.scryRenderedDOMComponentsWithClass(component, 'df-preview');
-      const previewImage = TestUtils.findRenderedDOMComponentWithTag(previews[0], 'img');
-      expect(React.findDOMNode(previewImage).style.width).to.be.eql('90px');
+      const preview = TestUtils.scryRenderedDOMComponentsWithClass(component, 'df-preview')[0];
+      const previewImage = preview.getElementsByTagName('img')[0];
+      expect(previewImage.style.width).to.be.eql('90px');
     });
 
   });
@@ -85,36 +85,34 @@ describe('Test of DropfileField', () => {
     it('should render preview icon with default style', function () {
       component = TestUtils.renderIntoDocument(<DropfileField maxFileCount={2}/>);
       component.setFiles([file1, file2]);
-      const previews = TestUtils.scryRenderedDOMComponentsWithClass(component, 'df-preview');
-      const previewIcon = TestUtils.findRenderedDOMComponentWithTag(previews[1], 'icon');
-      expect(React.findDOMNode(previewIcon).style.fontSize).to.be.eql('200%');
+      const preview = TestUtils.scryRenderedDOMComponentsWithClass(component, 'df-preview')[1];
+      const previewIcon = preview.getElementsByTagName('icon')[0];
+      expect(previewIcon.style.fontSize).to.be.eql('200%');
     });
 
-    it('should render preview icon with custome style', function () {
+    it('should render preview icon with custom style', function () {
       component = TestUtils.renderIntoDocument(<DropfileField maxFileCount={2} previewIconStyle={{fontSize: '90px'}}/>);
       component.setFiles([file1, file2]);
-      const previews = TestUtils.scryRenderedDOMComponentsWithClass(component, 'df-preview');
-      const previewIcon = TestUtils.findRenderedDOMComponentWithTag(previews[1], 'icon');
-      expect(React.findDOMNode(previewIcon).style.fontSize).to.be.eql('90px');
+      const preview = TestUtils.scryRenderedDOMComponentsWithClass(component, 'df-preview')[1];
+      const previewIcon = preview.getElementsByTagName('icon')[0];
+      expect(previewIcon.style.fontSize).to.be.eql('90px');
     });
 
     it('should render preview icon without className', function () {
       component = TestUtils.renderIntoDocument(<DropfileField maxFileCount={2} />);
       component.setFiles([file1, file2]);
-      const previews = TestUtils.scryRenderedDOMComponentsWithClass(component, 'df-preview');
-      const previewIcon = TestUtils.findRenderedDOMComponentWithTag(previews[1], 'icon');
-      expect(React.findDOMNode(previewIcon).className).to.be.eql('');
+      const preview = TestUtils.scryRenderedDOMComponentsWithClass(component, 'df-preview')[1];
+      const previewIcon = preview.getElementsByTagName('icon')[0];
+      expect(previewIcon.className).to.be.eql('');
     });
 
     it('should render preview icon with specified className', function () {
       component = TestUtils.renderIntoDocument(<DropfileField maxFileCount={2} iconClassNamesByExtension={{default: 'myIcon'}}/>);
       component.setFiles([file1, file2]);
-      const previews = TestUtils.scryRenderedDOMComponentsWithClass(component, 'df-preview');
-      const previewIcon = TestUtils.scryRenderedDOMComponentsWithClass(previews[1], 'myIcon');
+      const preview = TestUtils.scryRenderedDOMComponentsWithClass(component, 'df-preview')[1];
+      const previewIcon = preview.getElementsByClassName('myIcon');
       expect(previewIcon).to.be.length(1);
     });
-
-
   });
 
 
