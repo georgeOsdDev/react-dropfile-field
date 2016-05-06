@@ -1,10 +1,11 @@
 'use strict';
 
 import React from 'react';
-import {Paper, TextField, Styles} from 'material-ui';
-const ThemeManager = new Styles.ThemeManager();
+import ReactDOM from 'react-dom';
+import {Paper, TextField} from 'material-ui';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
 
-import DropfileField  from '../lib/components/DropfileField';
+import DropfileField  from '../index.js';
 
 //allow react dev tools work
 window.React = React;
@@ -18,7 +19,6 @@ const iconClassNamesByExtension = {
    'default': 'icon-file-text'
 }
 
-
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -26,7 +26,7 @@ class App extends React.Component {
 
   getChildContext() {
     return {
-      muiTheme: ThemeManager.getCurrentTheme()
+      muiTheme: getMuiTheme()
     };
   }
 
@@ -70,4 +70,4 @@ App.childContextTypes = {
   muiTheme: React.PropTypes.object
 };
 
-React.render(<App/>, document.getElementById('out'));
+ReactDOM.render(<App/>, document.getElementById('out'));
