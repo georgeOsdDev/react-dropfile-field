@@ -1,10 +1,10 @@
 'use strict';
 import React from 'react';
 import chai from 'chai';
-let expect = chai.expect;
+const expect = chai.expect;
 
-import DropfileField from '../../lib/components/DropfileField';
-const TestUtils = require('react-addons-test-utils');
+import DropfileField from '../../src/components/DropfileField';
+import TestUtils from 'react-addons-test-utils';
 
 describe('Test of DropfileField', () => {
   let component;
@@ -14,7 +14,7 @@ describe('Test of DropfileField', () => {
   });
 
   describe('Test of default props', () => {
-    it('should have default properties', function () {
+    it('should have default properties', () => {
       component = TestUtils.renderIntoDocument(<DropfileField/>);
 
       expect(component.props.textField).to.be.an('object');
@@ -25,14 +25,15 @@ describe('Test of DropfileField', () => {
   });
 
   describe('Test of preview image', () => {
-    let canvas = document.createElement('canvas');
-    let file1, file2
+    const canvas = document.createElement('canvas');
+    let file1;
+    let file2;
     beforeEach((done) => {
-
-      let d1 = false, d2 = false;
+      let d1 = false;
+      let d2 = false;
 
       canvas.toBlob(
-        function (blob) {
+        (blob) => {
           file1 = blob;
           d1 = true;
           if (d1 && d2) done();
@@ -41,7 +42,7 @@ describe('Test of DropfileField', () => {
       );
 
       canvas.toBlob(
-        function (blob) {
+        (blob) => {
           file2 = blob;
           d2 = true;
           if (d1 && d2) done();
@@ -50,7 +51,7 @@ describe('Test of DropfileField', () => {
       );
     });
 
-    it('should render preview image with default style', function () {
+    it('should render preview image with default style', () => {
       component = TestUtils.renderIntoDocument(<DropfileField maxFileCount={2}/>);
       component.setFiles([file1, file2]);
       const preview = TestUtils.scryRenderedDOMComponentsWithClass(component, 'df-preview')[0];
@@ -58,23 +59,22 @@ describe('Test of DropfileField', () => {
       expect(previewImage.style.width).to.be.eql('100%');
     });
 
-    it('should render preview image with custom style', function () {
-      component = TestUtils.renderIntoDocument(<DropfileField maxFileCount={2} previewImageStyle={{width: '90px'}}/>);
+    it('should render preview image with custom style', () => {
+      component = TestUtils.renderIntoDocument(<DropfileField maxFileCount={2} previewImageStyle={{ width: '90px' }}/>);
       component.setFiles([file1, file2]);
       const preview = TestUtils.scryRenderedDOMComponentsWithClass(component, 'df-preview')[0];
       const previewImage = preview.getElementsByTagName('img')[0];
       expect(previewImage.style.width).to.be.eql('90px');
     });
-
   });
 
   describe('Test of preview icon', () => {
-    let canvas = document.createElement('canvas');
-    let file1, file2 = new Blob(['<html></html>'], {type : 'text/html'})
+    const canvas = document.createElement('canvas');
+    let file1;
+    const file2 = new Blob(['<html></html>'], { type: 'text/html' });
     beforeEach((done) => {
-
       canvas.toBlob(
-        function (blob) {
+        (blob) => {
           file1 = blob;
           done();
         },
@@ -82,7 +82,7 @@ describe('Test of DropfileField', () => {
       );
     });
 
-    it('should render preview icon with default style', function () {
+    it('should render preview icon with default style', () => {
       component = TestUtils.renderIntoDocument(<DropfileField maxFileCount={2}/>);
       component.setFiles([file1, file2]);
       const preview = TestUtils.scryRenderedDOMComponentsWithClass(component, 'df-preview')[1];
@@ -90,15 +90,15 @@ describe('Test of DropfileField', () => {
       expect(previewIcon.style.fontSize).to.be.eql('200%');
     });
 
-    it('should render preview icon with custom style', function () {
-      component = TestUtils.renderIntoDocument(<DropfileField maxFileCount={2} previewIconStyle={{fontSize: '90px'}}/>);
+    it('should render preview icon with custom style', () => {
+      component = TestUtils.renderIntoDocument(<DropfileField maxFileCount={2} previewIconStyle={{ fontSize: '90px' }}/>);
       component.setFiles([file1, file2]);
       const preview = TestUtils.scryRenderedDOMComponentsWithClass(component, 'df-preview')[1];
       const previewIcon = preview.getElementsByTagName('icon')[0];
       expect(previewIcon.style.fontSize).to.be.eql('90px');
     });
 
-    it('should render preview icon without className', function () {
+    it('should render preview icon without className', () => {
       component = TestUtils.renderIntoDocument(<DropfileField maxFileCount={2} />);
       component.setFiles([file1, file2]);
       const preview = TestUtils.scryRenderedDOMComponentsWithClass(component, 'df-preview')[1];
@@ -106,8 +106,8 @@ describe('Test of DropfileField', () => {
       expect(previewIcon.className).to.be.eql('');
     });
 
-    it('should render preview icon with specified className', function () {
-      component = TestUtils.renderIntoDocument(<DropfileField maxFileCount={2} iconClassNamesByExtension={{default: 'myIcon'}}/>);
+    it('should render preview icon with specified className', () => {
+      component = TestUtils.renderIntoDocument(<DropfileField maxFileCount={2} iconClassNamesByExtension={{ default: 'myIcon' }}/>);
       component.setFiles([file1, file2]);
       const preview = TestUtils.scryRenderedDOMComponentsWithClass(component, 'df-preview')[1];
       const previewIcon = preview.getElementsByClassName('myIcon');
@@ -117,15 +117,15 @@ describe('Test of DropfileField', () => {
 
 
   describe('Test of file handling', () => {
-
-    let canvas = document.createElement('canvas');
-    let file1, file2;
+    const canvas = document.createElement('canvas');
+    let file1;
+    let file2;
     beforeEach((done) => {
-
-      let d1 = false, d2 = false;
+      let d1 = false;
+      let d2 = false;
 
       canvas.toBlob(
-        function (blob) {
+        (blob) => {
           file1 = blob;
           d1 = true;
           if (d1 && d2) done();
@@ -134,7 +134,7 @@ describe('Test of DropfileField', () => {
       );
 
       canvas.toBlob(
-        function (blob) {
+        (blob) => {
           file2 = blob;
           d2 = true;
           if (d1 && d2) done();
@@ -143,18 +143,20 @@ describe('Test of DropfileField', () => {
       );
     });
 
-    it('should call onDrop prop when files dropped to component', function () {
-      let result, called;
-      component = TestUtils.renderIntoDocument(<DropfileField onDrop={(e, files) => {called = true; result = files}}/>);
+    it('should call onDrop prop when files dropped to component', () => {
+      let result;
+      let called;
+      component = TestUtils.renderIntoDocument(<DropfileField onDrop={(e, files) => {called = true; result = files; }}/>);
       component.setFiles([file1]);
       expect(called).to.be.eql(true);
       expect(result).to.be.an('array');
       expect(result[0]).to.be.eql(file1);
     });
 
-    it('should call onDrop with files limited by maxFileCount prop', function () {
-      let result, called;
-      component = TestUtils.renderIntoDocument(<DropfileField maxFileCount={2} onDrop={(e, files) => {called = true; result = files}}/>);
+    it('should call onDrop with files limited by maxFileCount prop', () => {
+      let result;
+      let called;
+      component = TestUtils.renderIntoDocument(<DropfileField maxFileCount={2} onDrop={(e, files) => {called = true; result = files; }}/>);
       component.setFiles([file1, file2, file1]);
       expect(called).to.be.eql(true);
       expect(result).to.be.an('array');
@@ -163,7 +165,7 @@ describe('Test of DropfileField', () => {
       expect(result[1]).to.be.eql(file2);
     });
 
-    it('should call onFileClear when file cleared', function () {
+    it('should call onFileClear when file cleared', () => {
       let called;
       component = TestUtils.renderIntoDocument(<DropfileField maxFileCount={2} onFileClear={() => {called = true; }}/>);
       component.setFiles([file1, file2, file1]);
@@ -174,5 +176,4 @@ describe('Test of DropfileField', () => {
 
   // @TODO
   // How to test drop file input?
-
 });
