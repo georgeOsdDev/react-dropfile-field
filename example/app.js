@@ -5,7 +5,7 @@ import ReactDOM from 'react-dom';
 import {Paper, TextField} from 'material-ui';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 
-import DropfileField  from '../index.js';
+import DropfileField  from '../lib/index.js';
 
 //allow react dev tools work
 window.React = React;
