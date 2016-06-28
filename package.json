@@ -1,8 +1,8 @@
 {
   "name": "react-dropfile-field",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "React component which handle file drop and preview",
-  "main": "index.js",
+  "main": "lib/index.js",
   "scripts": {
     "browser": "browser-sync start --files example/* --server example",
     "watch:example": "watchify example/app.js -dv -o example/bundle.js",
