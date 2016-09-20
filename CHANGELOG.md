@@ -1,5 +1,8 @@
 ## Change Log
 
+### Ver 0.0.6
+  + #15 [Handle cancel button on file picker](https://github.com/georgeOsdDev/react-dropfile-field/issues/15)
+
 ### Ver 0.0.5
   + #12 [Installation issue](https://github.com/georgeOsdDev/react-dropfile-field/issues/12)
 
