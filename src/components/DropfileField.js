@@ -113,7 +113,7 @@ class DropfileField extends React.Component {
   }
 
   setFiles(_files, e) {
-    if (_files) {
+    if (_files && _files.length > 0) {
       const files = Array.prototype.slice.call(_files, 0, this.props.maxFileCount);
       this.setState({
         files,
@@ -121,6 +121,8 @@ class DropfileField extends React.Component {
       }, () => {
         this.props.onDrop(e, files);
       });
+    } else {
+      this.clearFiles();
     }
   }
 
@@ -136,8 +138,8 @@ class DropfileField extends React.Component {
     let rootStyle = styles.root;
     let textFieldStyle = styles.textField;
     let previewStyle = styles.hidden;
-    let previewImageStyle = Helper.merge(styles.previewImage, this.props.previewImageStyle);
-    let previewIconStyle = Helper.merge(styles.previewIcon, this.props.previewIconStyle);
+    const previewImageStyle = Helper.merge(styles.previewImage, this.props.previewImageStyle);
+    const previewIconStyle = Helper.merge(styles.previewIcon, this.props.previewIconStyle);
 
     if (this.state.isDragActive) {
       rootStyle = Helper.merge(rootStyle, styles.dragActive);
@@ -148,7 +150,7 @@ class DropfileField extends React.Component {
     if (this.state.files.length > 0) {
       preview = Array.prototype.map.call(this.state.files, (f, i) => {
         if (f.type.indexOf('image') > -1) {
-          let src = URL.createObjectURL(f);
+          const src = URL.createObjectURL(f);
           return (
             <div className="df-preview" key={i} style={styles.previewFile}>
               <img src={src} style={previewImageStyle}/>
@@ -156,7 +158,8 @@ class DropfileField extends React.Component {
           );
         }
         const extension = Helper.getFileExtension(f.name);
-        let iconClassName = this.props.iconClassNamesByExtension[extension] || this.props.iconClassNamesByExtension.default;
+        const iconClassName = this.props.iconClassNamesByExtension[extension] ||
+                              this.props.iconClassNamesByExtension.default;
         return (
           <div className="df-preview" key={i} style={styles.previewFile}>
             <icon className={iconClassName} style={previewIconStyle} />

@@ -172,6 +172,14 @@ describe('Test of DropfileField', () => {
       component.clearFiles();
       expect(called).to.be.eql(true);
     });
+
+    it('should clear files when no file passed', () => {
+      let called;
+      component = TestUtils.renderIntoDocument(<DropfileField maxFileCount={2} onFileClear={() => {called = true; }}/>);
+      component.setFiles([file1]); // set file
+      component.setFiles([]); // set empty list
+      expect(called).to.be.eql(true);
+    });
   });
 
   // @TODO
