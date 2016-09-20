@@ -1,7 +1,7 @@
 'use strict';
 import chai from 'chai';
 const expect = chai.expect;
-import Helper from '../../lib/helper/Helper';
+import Helper from '../../src/helper/Helper';
 
 describe('Test of Helper', () => {
   describe('Helper offer merge helper', () => {
